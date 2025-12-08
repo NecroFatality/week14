@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "got": "^14.6.5",
     "next": "^16.0.7",
     "react": "latest",
