@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "got": "^14.6.5",
+    "next": "^16.0.7",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
