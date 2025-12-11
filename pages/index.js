@@ -1,62 +1,95 @@
-// Import the Head component from Next.js to modify the <head> of the HTML page (for titles, meta tags, etc.)
 import Head from 'next/head';
-
-// Import the Layout component and the siteTitle variable from the components folder
-// Layout wraps pages in a consistent layout (header, footer, etc.)
-// siteTitle can be used for setting the page title
 import Layout, { siteTitle } from '../components/layout';
-
-// Import utility CSS styles from a CSS module
-// utilStyles contains classes like headingMd and padding1px that are scoped to this component
-import utilStyles from '../styles/utils.module.css';
-
-// Import the Link component from Next.js for client-side navigation between pages
+import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 
-// Import the function getSortedRecipesData from lib/posts
-// This function fetches all recipes and sorts them alphabetically
-import { getSortedRecipesData } from '../lib/posts';
- 
-// This function runs at build time (SSG) and fetches the recipe data for the page
+import { getSortedBreakfastData } from '../lib/breakfast';
+import { getSortedLunchData } from '../lib/lunch';
+import { getSortedDinnerData } from '../lib/dinner';
+
 export async function getStaticProps() {
-  // Call getSortedRecipesData to get an array of all recipes
-  const allRecipesData = await getSortedRecipesData();
-  
-  // Return the recipe data as props to the Home component
+  const breakfastRecipes = await getSortedBreakfastData();
+  const lunchRecipes = await getSortedLunchData();
+  const dinnerRecipes = await getSortedDinnerData();
+
   return {
     props: {
-      allRecipesData, // This will be passed to the Home component as a prop
+      breakfastRecipes,
+      lunchRecipes,
+      dinnerRecipes,
     },
+    revalidate: 60, // ISR - regenerate every 60 seconds
   };
 }
 
-// Default export: the main Home component that renders the homepage
-// It receives allRecipesData as a prop from getStaticProps
-export default function Home({ allRecipesData }) {
+function MealSection({ title, emoji, recipes, basePath, colorClass }) {
   return (
-    // Wrap the page in the Layout component
-    // The "home" prop may trigger a different layout or styling for the homepage
-    <Layout home>
- 
-      {/* A section of the page with some spacing and medium-sized heading styles */}
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        
-        {/* Page heading */}
-        <h2 className={utilStyles.headingLg}>Some of my Favorite Recipes.</h2>
-        
-        {/* Unordered list of recipes */}
-        <ul className={utilStyles.list}>
-          {/* Loop over each recipe in allRecipesData */}
-          {allRecipesData.map((recipe) => (
-            // Each list item must have a unique key (ID) for React
-            <li className={utilStyles.listItem} key={recipe.ID}>
-              
-              {/* Link to the dynamic recipe page using Next.js Link */}
-              <Link href={`/recipes/${recipe.ID}`}>{recipe.recipe_name}</Link>
-            </li>
+    <section className={`${styles.mealSection} ${colorClass}`}>
+      <h2 className={styles.mealTitle}>
+        <span className={styles.emoji}>{emoji}</span> {title}
+      </h2>
+      {recipes.length > 0 ? (
+        <div className={styles.recipeGrid}>
+          {recipes.map((recipe) => (
+            <Link
+              href={`/${basePath}/${recipe.ID}`}
+              key={recipe.ID}
+              className={styles.recipeCard}
+            >
+              <span className={styles.recipeName}>
+                {recipe.recipe_name || recipe.post_title}
+              </span>
+              {recipe.ingredients && (
+                <span className={styles.ingredientPreview}>
+                  {recipe.ingredients.split(',').slice(0, 3).join(', ')}...
+                </span>
+              )}
+            </Link>
           ))}
-        </ul>
+        </div>
+      ) : (
+        <p className={styles.noRecipes}>No recipes yet. Add some in WordPress!</p>
+      )}
+    </section>
+  );
+}
+
+export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes }) {
+  return (
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
+
+      <section className={styles.intro}>
+        <p className={styles.description}>
+          Welcome to our family cookbook! Explore delicious recipes for every meal of the day.
+        </p>
       </section>
+
+      <MealSection
+        title="Breakfast"
+        emoji="🌅"
+        recipes={breakfastRecipes}
+        basePath="breakfast"
+        colorClass={styles.breakfast}
+      />
+
+      <MealSection
+        title="Lunch"
+        emoji="☀️"
+        recipes={lunchRecipes}
+        basePath="lunch"
+        colorClass={styles.lunch}
+      />
+
+      <MealSection
+        title="Dinner"
+        emoji="🌙"
+        recipes={dinnerRecipes}
+        basePath="dinner"
+        colorClass={styles.dinner}
+      />
     </Layout>
   );
 }

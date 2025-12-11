@@ -1,15 +1,164 @@
+/* Main container */
 .container {
-  max-width: 36rem;
-  padding: 0 1rem;
-  margin: 3rem auto 6rem;
+  max-width: 800px;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
- 
+
+/* Header */
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2.5rem 0 2rem;
+  text-align: center;
 }
- 
-.backToHome {
-  margin: 3rem 0 0;
+
+.logoContainer {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  border-radius: 50%;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 8px 30px rgba(232, 93, 47, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logoSmall {
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  transition: transform 0.2s ease;
+}
+
+.siteTitle {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.siteTitleSmall {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+.headerLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.headerLink:hover {
+  background: var(--bg-secondary);
+  text-decoration: none;
+}
+
+.headerLink:hover .logoSmall {
+  transform: scale(1.1);
+}
+
+.headerLink:hover .siteTitleSmall {
+  color: var(--accent-color);
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.backLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.backLink:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  text-decoration: none;
+  transform: translateX(-4px);
+}
+
+.copyright {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .header {
+    padding: 1.5rem 0 1rem;
+  }
+
+  .siteTitle {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .siteTitle {
+    font-size: 1.75rem;
+  }
+
+  .siteTitleSmall {
+    font-size: 1.1rem;
+  }
+
+  .logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
 }

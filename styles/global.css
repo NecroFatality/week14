@@ -1,52 +1,246 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+/* CSS Custom Properties (Color Palette) */
+:root {
+  /* Primary Colors */
+  --accent-color: #E85D2F;
+  --accent-dark: #C44B24;
+  --accent-light: #FF7F50;
+  --accent-gradient: linear-gradient(135deg, #E85D2F 0%, #FF7F50 100%);
+
+  /* Meal Type Colors */
+  --breakfast-color: #FFB74D;
+  --lunch-color: #66BB6A;
+  --dinner-color: #EF5350;
+  --dessert-color: #EC407A;
+  --other-color: #AB47BC;
+
+  /* Neutral Colors */
+  --bg-primary: #FDF8F3;
+  --bg-secondary: #F5EDE4;
+  --card-bg: #FFFFFF;
+  --text-primary: #2D2A26;
+  --text-secondary: #6B665F;
+  --border-color: #E8E0D6;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: antiquewhite;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
+  background: var(--bg-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
   line-height: 1.6;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background pattern */
+body {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(232, 93, 47, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 127, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 183, 77, 0.03) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
   font-size: 1.3rem;
+  color: var(--accent-color);
 }
- 
-* {
-  box-sizing: border-box;
+
+p {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
 }
- 
+
+/* Links */
 a {
-  color: red;
+  color: var(--accent-color);
   text-decoration: none;
-  text-transform: capitalize;
-  font-size: 1.6rem;
+  transition: color 0.2s ease;
 }
- 
+
 a:hover {
+  color: var(--accent-dark);
   text-decoration: underline;
 }
- 
+
+/* Images */
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
-h1{
-  color: orange;
-  text-transform: capitalize;
+/* Lists */
+ul, ol {
+  margin: 0;
+  padding-left: 1.5rem;
 }
 
-img{
-  width: 100%;    
-  max-width: 500px;  
-  height:  auto;    
-  margin: 0 auto;
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Selection styles */
+::selection {
+  background: rgba(232, 93, 47, 0.2);
+  color: var(--text-primary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Recipe page specific styles */
+.recipe-ingredients {
+  background: var(--bg-secondary);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.recipe-ingredients ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-ingredients li {
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.recipe-ingredients li::before {
+  content: '•';
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.recipe-ingredients li:last-child {
+  border-bottom: none;
+}
+
+.recipe-steps {
+  counter-reset: step-counter;
+}
+
+.recipe-steps ol {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-steps li {
+  counter-increment: step-counter;
+  padding: var(--spacing-md);
+  padding-left: 3.5rem;
+  position: relative;
+  margin-bottom: var(--spacing-md);
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.recipe-steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
 }

@@ -1,0 +1,217 @@
+/* Recipe Article */
+.recipeArticle {
+  max-width: 100%;
+}
+
+/* Recipe Header */
+.recipeHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.mealBadge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.recipeTitle {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+
+.difficulty {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionIcon {
+  font-size: 1.2rem;
+}
+
+/* Ingredients Section */
+.ingredientsSection {
+  background: linear-gradient(135deg, rgba(102, 187, 106, 0.08) 0%, var(--card-bg) 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--lunch-color);
+  margin-bottom: 2rem;
+}
+
+.ingredientsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.ingredientItem {
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.ingredientItem::before {
+  content: '•';
+  color: var(--lunch-color);
+  font-weight: bold;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.ingredientItem:hover {
+  transform: translateX(4px);
+  border-color: var(--lunch-color);
+}
+
+/* Steps Section */
+.stepsSection {
+  background: linear-gradient(135deg, rgba(232, 93, 47, 0.05) 0%, var(--card-bg) 100%);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--accent-color);
+}
+
+.stepsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+}
+
+.stepItem {
+  counter-increment: step-counter;
+  padding: 1rem 1rem 1rem 3.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.stepItem::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.stepItem:last-child {
+  margin-bottom: 0;
+}
+
+.stepItem:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(232, 93, 47, 0.1);
+}
+
+/* HTML Content fallback */
+.contentHtml {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  line-height: 1.8;
+}
+
+.contentHtml p {
+  margin-bottom: 1rem;
+}
+
+.contentHtml p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .recipeTitle {
+    font-size: 1.8rem;
+  }
+
+  .ingredientsList {
+    grid-template-columns: 1fr;
+  }
+
+  .ingredientsSection,
+  .stepsSection {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipeTitle {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .stepItem {
+    padding-left: 3rem;
+    font-size: 0.95rem;
+  }
+
+  .stepItem::before {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.8rem;
+    left: 0.5rem;
+  }
+}
+

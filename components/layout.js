@@ -3,10 +3,10 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
- 
-const name = 'Jorge S.';
-export const siteTitle = 'My first custom next.js site';
- 
+
+const name = 'Santiago\'s Kitchen';
+export const siteTitle = 'Santiago\'s Kitchen | Family Cookbook';
+
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
@@ -14,56 +14,58 @@ export default function Layout({ children, home }) {
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="Discover delicious recipes for breakfast, lunch, and dinner"
         />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle,
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
+        <meta property="og:image" content="/images/desserts.png" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+      
       <header className={styles.header}>
         {home ? (
           <>
-            <Image
-              priority
-              src="/images/desserts.png"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=""
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <div className={styles.logoContainer}>
+              <Image
+                priority
+                src="/images/desserts.png"
+                className={styles.logo}
+                height={120}
+                width={120}
+                alt="Recipe logo"
+              />
+            </div>
+            <h1 className={styles.siteTitle}>{name}</h1>
+            <p className={styles.tagline}>Our family cookbook, passed down with love</p>
           </>
         ) : (
           <>
-            <Link href="/">
+            <Link href="/" className={styles.headerLink}>
               <Image
                 priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt=""
+                src="/images/desserts.png"
+                className={styles.logoSmall}
+                height={60}
+                width={60}
+                alt="Recipe logo"
               />
+              <span className={styles.siteTitleSmall}>{name}</span>
             </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/" className={utilStyles.colorInherit}>
-                {name}
-              </Link>
-            </h2>
           </>
         )}
       </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">← Back to home</Link>
-        </div>
-      )}
+
+      <main className={styles.main}>{children}</main>
+
+      <footer className={styles.footer}>
+        {!home && (
+          <Link href="/" className={styles.backLink}>
+            ← Back to all recipes
+          </Link>
+        )}
+        <p className={styles.copyright}>
+          © {new Date().getFullYear()} {name}. All recipes made with ❤️
+        </p>
+      </footer>
     </div>
   );
 }
