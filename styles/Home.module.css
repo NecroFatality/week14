@@ -37,6 +37,11 @@
   background: linear-gradient(135deg, rgba(239, 83, 80, 0.08) 0%, var(--card-bg) 100%);
 }
 
+.dessert {
+  border-left-color: var(--dessert-color);
+  background: linear-gradient(135deg, rgba(236, 64, 122, 0.08) 0%, var(--card-bg) 100%);
+}
+
 .noRecipes {
   color: var(--text-secondary);
   font-style: italic;

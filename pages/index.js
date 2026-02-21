@@ -6,19 +6,22 @@ import Link from 'next/link';
 import { getSortedBreakfastData } from '../lib/breakfast';
 import { getSortedLunchData } from '../lib/lunch';
 import { getSortedDinnerData } from '../lib/dinner';
+import { getSortedDessertData } from '../lib/dessert';
 
 export async function getStaticProps() {
   const breakfastRecipes = await getSortedBreakfastData();
   const lunchRecipes = await getSortedLunchData();
   const dinnerRecipes = await getSortedDinnerData();
+  const dessertRecipes = await getSortedDessertData();
 
   return {
     props: {
       breakfastRecipes,
       lunchRecipes,
       dinnerRecipes,
+      dessertRecipes,
     },
-    revalidate: 60, // ISR - regenerate every 60 seconds
+    revalidate: 60,
   };
 }
 
@@ -54,7 +57,7 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
   );
 }
 
-export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes }) {
+export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, dessertRecipes }) {
   return (
     <Layout home>
       <Head>
@@ -89,6 +92,14 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes }) 
         recipes={dinnerRecipes}
         basePath="dinner"
         colorClass={styles.dinner}
+      />
+
+      <MealSection
+        title="Dessert"
+        emoji="🍰"
+        recipes={dessertRecipes}
+        basePath="dessert"
+        colorClass={styles.dessert}
       />
     </Layout>
   );
