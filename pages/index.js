@@ -42,11 +42,6 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
               <span className={styles.recipeName}>
                 {recipe.recipe_name || recipe.post_title}
               </span>
-              {recipe.ingredients && (
-                <span className={styles.ingredientPreview}>
-                  {recipe.ingredients.split(',').slice(0, 3).join(', ')}...
-                </span>
-              )}
             </Link>
           ))}
         </div>
