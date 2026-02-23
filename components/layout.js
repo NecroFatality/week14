@@ -3,11 +3,34 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 const name = 'Santiago\'s Kitchen';
 export const siteTitle = 'Santiago\'s Kitchen | Family Cookbook';
 
 export default function Layout({ children, home }) {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    if (newMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,6 +43,18 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+
+      <div className={styles.themeToggle}>
+        <span className={styles.themeIcon}>☀️</span>
+        <button
+          className={`${styles.toggleSwitch} ${darkMode ? styles.active : ''}`}
+          onClick={toggleDarkMode}
+          aria-label="Toggle dark mode"
+        >
+          <span className={styles.toggleSlider}></span>
+        </button>
+        <span className={styles.themeIcon}>🌙</span>
+      </div>
       
       <header className={styles.header}>
         {home ? (
