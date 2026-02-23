@@ -82,8 +82,8 @@ export default function DessertRecipe({ recipeData }) {
           </section>
         )}
 
-        {recipeData.video_link && (
-          <VideoEmbed url={recipeData.video_link} />
+        {recipeData.link && (
+          <VideoEmbed url={recipeData.link} />
         )}
       </article>
     </Layout>
