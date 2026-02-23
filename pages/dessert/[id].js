@@ -1,4 +1,5 @@
 import Layout from '../../components/layout';
+import VideoEmbed from '../../components/VideoEmbed';
 import { getAllDessertIds, getDessertData } from '../../lib/dessert';
 import Head from 'next/head';
 import styles from '../../styles/Recipe.module.css';
@@ -79,6 +80,10 @@ export default function DessertRecipe({ recipeData }) {
             </h2>
             <div className={styles.contentHtml} dangerouslySetInnerHTML={{ __html: recipeData.post_content }} />
           </section>
+        )}
+
+        {recipeData.video_link && (
+          <VideoEmbed url={recipeData.video_link} />
         )}
       </article>
     </Layout>

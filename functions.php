@@ -52,12 +52,14 @@ function get_all_breakfast() {
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
             pm3.meta_value AS steps,
-            pm4.meta_value AS difficulty
+            pm4.meta_value AS difficulty,
+            pm5.meta_value AS video_link
          FROM {$wpdb->posts} p
          LEFT JOIN {$wpdb->postmeta} pm1 ON p.ID = pm1.post_id AND pm1.meta_key = 'recipe_name'
          LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = 'ingredients'
          LEFT JOIN {$wpdb->postmeta} pm3 ON p.ID = pm3.post_id AND pm3.meta_key = 'steps'
          LEFT JOIN {$wpdb->postmeta} pm4 ON p.ID = pm4.post_id AND pm4.meta_key = 'difficulty'
+         LEFT JOIN {$wpdb->postmeta} pm5 ON p.ID = pm5.post_id AND pm5.meta_key = 'video_link'
          WHERE p.post_type = 'breakfast' AND p.post_status = 'publish'",
         ARRAY_A
     );
@@ -79,12 +81,14 @@ function get_all_lunch() {
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
             pm3.meta_value AS steps,
-            pm4.meta_value AS difficulty
+            pm4.meta_value AS difficulty,
+            pm5.meta_value AS video_link
          FROM {$wpdb->posts} p
          LEFT JOIN {$wpdb->postmeta} pm1 ON p.ID = pm1.post_id AND pm1.meta_key = 'recipe_name'
          LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = 'ingredients'
          LEFT JOIN {$wpdb->postmeta} pm3 ON p.ID = pm3.post_id AND pm3.meta_key = 'steps'
          LEFT JOIN {$wpdb->postmeta} pm4 ON p.ID = pm4.post_id AND pm4.meta_key = 'difficulty'
+         LEFT JOIN {$wpdb->postmeta} pm5 ON p.ID = pm5.post_id AND pm5.meta_key = 'video_link'
          WHERE p.post_type = 'lunch' AND p.post_status = 'publish'",
         ARRAY_A
     );
@@ -106,12 +110,14 @@ function get_all_dinner() {
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
             pm3.meta_value AS steps,
-            pm4.meta_value AS difficulty
+            pm4.meta_value AS difficulty,
+            pm5.meta_value AS video_link
          FROM {$wpdb->posts} p
          LEFT JOIN {$wpdb->postmeta} pm1 ON p.ID = pm1.post_id AND pm1.meta_key = 'recipe_name'
          LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = 'ingredients'
          LEFT JOIN {$wpdb->postmeta} pm3 ON p.ID = pm3.post_id AND pm3.meta_key = 'steps'
          LEFT JOIN {$wpdb->postmeta} pm4 ON p.ID = pm4.post_id AND pm4.meta_key = 'difficulty'
+         LEFT JOIN {$wpdb->postmeta} pm5 ON p.ID = pm5.post_id AND pm5.meta_key = 'video_link'
          WHERE p.post_type = 'dinner' AND p.post_status = 'publish'",
         ARRAY_A
     );
@@ -133,12 +139,14 @@ function get_all_dessert() {
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
             pm3.meta_value AS steps,
-            pm4.meta_value AS difficulty
+            pm4.meta_value AS difficulty,
+            pm5.meta_value AS video_link
          FROM {$wpdb->posts} p
          LEFT JOIN {$wpdb->postmeta} pm1 ON p.ID = pm1.post_id AND pm1.meta_key = 'recipe_name'
          LEFT JOIN {$wpdb->postmeta} pm2 ON p.ID = pm2.post_id AND pm2.meta_key = 'ingredients'
          LEFT JOIN {$wpdb->postmeta} pm3 ON p.ID = pm3.post_id AND pm3.meta_key = 'steps'
          LEFT JOIN {$wpdb->postmeta} pm4 ON p.ID = pm4.post_id AND pm4.meta_key = 'difficulty'
+         LEFT JOIN {$wpdb->postmeta} pm5 ON p.ID = pm5.post_id AND pm5.meta_key = 'video_link'
          WHERE p.post_type = 'dessert' AND p.post_status = 'publish'",
         ARRAY_A
     );
