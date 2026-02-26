@@ -1,19 +1,19 @@
 import Layout from '../../components/layout';
 import VideoEmbed from '../../components/VideoEmbed';
-import { getAllLunchIds, getLunchData } from '../../lib/lunch';
+import { getAllDinnerSlugs, getDinnerData } from '../../lib/dinner';
 import Head from 'next/head';
 import styles from '../../styles/Recipe.module.css';
 
 export async function getStaticProps({ params }) {
-  const recipeData = await getLunchData(params.id);
+  const recipeData = await getDinnerData(params.slug);
   return {
     props: { recipeData },
-    revalidate: 60, // ISR - regenerate every 60 seconds
+    revalidate: 60,
   };
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllLunchIds();
+  const paths = await getAllDinnerSlugs();
   return { paths, fallback: 'blocking' };
 }
 
@@ -27,7 +27,7 @@ function parseSteps(steps) {
   return steps.split(/\d+\.\s*|\n/).map(item => item.trim()).filter(item => item.length > 0);
 }
 
-export default function LunchRecipe({ recipeData }) {
+export default function DinnerRecipe({ recipeData }) {
   const name = recipeData.recipe_name || recipeData.post_title;
   const ingredientsList = parseIngredients(recipeData.ingredients);
   const stepsList = parseSteps(recipeData.steps);
@@ -35,12 +35,12 @@ export default function LunchRecipe({ recipeData }) {
   return (
     <Layout>
       <Head>
-        <title>{`${name} | Lunch`}</title>
+        <title>{`${name} | Dinner`}</title>
       </Head>
 
       <article className={styles.recipeArticle}>
         <header className={styles.recipeHeader}>
-          <span className={styles.mealBadge}>☀️ Lunch</span>
+          <span className={styles.mealBadge}>🌙 Dinner</span>
           <h1 className={styles.recipeTitle}>{name}</h1>
           {recipeData.difficulty && (
             <span className={styles.difficulty}>Difficulty: {recipeData.difficulty}</span>

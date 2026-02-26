@@ -48,6 +48,7 @@ function get_all_breakfast() {
         "SELECT 
             p.ID, 
             p.post_title, 
+            p.post_name AS slug,
             p.post_content,
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
@@ -77,6 +78,7 @@ function get_all_lunch() {
         "SELECT 
             p.ID, 
             p.post_title, 
+            p.post_name AS slug,
             p.post_content,
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
@@ -106,6 +108,7 @@ function get_all_dinner() {
         "SELECT 
             p.ID, 
             p.post_title, 
+            p.post_name AS slug,
             p.post_content,
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,
@@ -135,6 +138,7 @@ function get_all_dessert() {
         "SELECT 
             p.ID, 
             p.post_title, 
+            p.post_name AS slug,
             p.post_content,
             pm1.meta_value AS recipe_name, 
             pm2.meta_value AS ingredients,

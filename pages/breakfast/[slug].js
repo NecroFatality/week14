@@ -1,19 +1,19 @@
 import Layout from '../../components/layout';
 import VideoEmbed from '../../components/VideoEmbed';
-import { getAllBreakfastIds, getBreakfastData } from '../../lib/breakfast';
+import { getAllBreakfastSlugs, getBreakfastData } from '../../lib/breakfast';
 import Head from 'next/head';
 import styles from '../../styles/Recipe.module.css';
 
 export async function getStaticProps({ params }) {
-  const recipeData = await getBreakfastData(params.id);
+  const recipeData = await getBreakfastData(params.slug);
   return {
     props: { recipeData },
-    revalidate: 60, // ISR - regenerate every 60 seconds
+    revalidate: 60,
   };
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllBreakfastIds();
+  const paths = await getAllBreakfastSlugs();
   return { paths, fallback: 'blocking' };
 }
 
