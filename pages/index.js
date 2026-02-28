@@ -35,8 +35,8 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
         <div className={styles.recipeGrid}>
           {recipes.map((recipe) => (
             <Link
-              href={`/${basePath}/${recipe.slug}`}
-              key={recipe.slug}
+              href={`/${basePath}/${recipe.slug || recipe.ID}`}
+              key={recipe.slug || recipe.ID}
               className={styles.recipeCard}
             >
               <span className={styles.recipeName}>
