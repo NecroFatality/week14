@@ -80,7 +80,7 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, de
 
       <section className={styles.intro}>
         <p className={styles.description}>
-          Welcome to our family cookbook! Explore delicious recipes for every meal of the day.
+          Welcome to our family cookbook! Bookmark this page — new recipes added weekly.
         </p>
       </section>
 
