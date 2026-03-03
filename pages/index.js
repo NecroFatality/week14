@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { getSortedBreakfastData } from '../lib/breakfast';
 import { getSortedLunchData } from '../lib/lunch';
@@ -53,6 +54,26 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
 }
 
 export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, dessertRecipes }) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filterRecipes = (recipes) => {
+    if (!searchQuery.trim()) return recipes;
+    const query = searchQuery.toLowerCase();
+    return recipes.filter(recipe => {
+      const name = (recipe.recipe_name || recipe.post_title || '').toLowerCase();
+      const ingredients = (recipe.ingredients || '').toLowerCase();
+      return name.includes(query) || ingredients.includes(query);
+    });
+  };
+
+  const filteredBreakfast = filterRecipes(breakfastRecipes);
+  const filteredLunch = filterRecipes(lunchRecipes);
+  const filteredDinner = filterRecipes(dinnerRecipes);
+  const filteredDessert = filterRecipes(dessertRecipes);
+
+  const totalResults = filteredBreakfast.length + filteredLunch.length + filteredDinner.length + filteredDessert.length;
+  const isSearching = searchQuery.trim().length > 0;
+
   return (
     <Layout home>
       <Head>
@@ -65,10 +86,26 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, de
         </p>
       </section>
 
+      <div className={styles.searchContainer}>
+        <input
+          type="text"
+          placeholder="Search recipes by name or ingredient..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+          aria-label="Search recipes"
+        />
+        {isSearching && (
+          <p className={styles.searchResults}>
+            Found {totalResults} recipe{totalResults !== 1 ? 's' : ''}
+          </p>
+        )}
+      </div>
+
       <MealSection
         title="Breakfast"
         emoji="🌅"
-        recipes={breakfastRecipes}
+        recipes={filteredBreakfast}
         basePath="breakfast"
         colorClass={styles.breakfast}
       />
@@ -76,7 +113,7 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, de
       <MealSection
         title="Lunch"
         emoji="☀️"
-        recipes={lunchRecipes}
+        recipes={filteredLunch}
         basePath="lunch"
         colorClass={styles.lunch}
       />
@@ -84,7 +121,7 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, de
       <MealSection
         title="Dinner"
         emoji="🌙"
-        recipes={dinnerRecipes}
+        recipes={filteredDinner}
         basePath="dinner"
         colorClass={styles.dinner}
       />
@@ -92,7 +129,7 @@ export default function Home({ breakfastRecipes, lunchRecipes, dinnerRecipes, de
       <MealSection
         title="Dessert"
         emoji="🍰"
-        recipes={dessertRecipes}
+        recipes={filteredDessert}
         basePath="dessert"
         colorClass={styles.dessert}
       />

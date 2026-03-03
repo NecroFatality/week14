@@ -12,6 +12,41 @@
   line-height: 1.7;
 }
 
+/* Search bar */
+.searchContainer {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--text-secondary);
+}
+
+.searchInput:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(232, 93, 47, 0.1);
+}
+
+.searchResults {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
 /* Meal sections */
 .mealSection {
   margin-bottom: 2.5rem;
