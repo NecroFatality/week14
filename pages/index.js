@@ -32,7 +32,7 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
       <h2 className={styles.mealTitle}>
         <span className={styles.emoji}>{emoji}</span> {title}
       </h2>
-      {recipes.length > 0 ? (
+      {recipes.length > 0 && (
         <div className={styles.recipeGrid}>
           {recipes.map((recipe) => (
             <Link
@@ -46,8 +46,6 @@ function MealSection({ title, emoji, recipes, basePath, colorClass }) {
             </Link>
           ))}
         </div>
-      ) : (
-        <p className={styles.noRecipes}>No recipes yet. Add some in WordPress!</p>
       )}
     </section>
   );
